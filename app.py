@@ -1,0 +1,5 @@
+print("Bienvenid@ al taxímetro")
+print("Opciones: ")
+print("1. Iniciar el taxímetro")
+print("2. Finalizar viaje")
+print("3. Salir")
