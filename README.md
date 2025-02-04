@@ -1,5 +1,3 @@
-# Taximetro
-
 
 <h1> Taxímetro </h1>
 
