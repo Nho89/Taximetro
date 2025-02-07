@@ -1,27 +1,60 @@
 import datetime 
 
 print("Bienvenid@ al taxímetro")
-print("Explicación")
-# print("1. Iniciar el taxímetro")
-# print("2. Finalizar viaje")
-# print("4. Salir")
+print("El taxímetro funciona de la siguiente manera:")
 
 
-feeBase = 3.5
-feeStop = 0.02
-feeMove = 1.5
 
 
 def initRide():
     print("\n---Viaje iniciado!---")
     startTime = datetime.datetime.now()
-    return startTime
+    statusChange = startTime
+    currentStatus = "move"
+    return startTime, statusChange, currentStatus, 0, 0
 
-def finish(startTime, duration, distance):
+def pauseRide(currentStatus, statusChange, moveDuration, stopDuration):
+    now = datetime.datetime.now()
+    elapsed = (now - statusChange).total_seconds() / 60 
+    if currentStatus == "move":
+        moveDuration += elapsed
+        currentStatus = "pause"
+        print("Viaje en pausa")
+
+    else:
+        stopDuration += elapsed
+        currentStatus = "move"
+        print("Viaje reanudado")
+    return currentStatus, now, moveDuration, stopDuration
+
+def changeStatus(currentStatus, statusChange, moveDuration, stopDuration):
+    now = datetime.datetime.now()
+    elapsed = (now - statusChange).total_seconds() / 60
+
+    if currentStatus == "move":
+        moveDuration += elapsed
+        currentStatus = "stop"
+        print("Viaje detenido")
+    else:
+        stopDuration += elapsed
+        currentStatus = "move"
+        print("Taxi en movimiento")
+
+    return currentStatus, now, moveDuration, stopDuration    
+
+def finishRide(start_time, currentStatus, statusChange, moveDuration, stopDuration):
+    now = datetime.datetime.now()
+    elapsed = (now - start_time).total_seconds() / 60
+    if currentStatus == "move":
+        move_duration += elapsed
+    elif currentStatus == "stop":
+        stop_duration += elapsed
+
+    totalFee = calculateFee(moveDuration, stopDuration)    
     print("\n---Viaje finalizado---")
-    totalFee = calculateFee(startTime, duration, distance)
+    
     print(f"El costo total del viaje es: €{totalFee:.2f}")
-    return totalFee
+    return totalFee, moveDuration, stopDuration
 
 def calculateFee(startTime, duration = None, distance = None):
     currentTime = datetime.datetime.now()
@@ -31,7 +64,9 @@ def calculateFee(startTime, duration = None, distance = None):
 
     if distance is None:
         distance = 0
-
+    feeBase = 3.5
+    feeStop = 0.02
+    feeMove = 1.5
     baseFee = feeBase
     stopFee = duration * feeStop
     moveFee = max(0, duration - 10) * feeMove
@@ -89,7 +124,7 @@ def main():
                 #     startTime = None
                 #     isStop = False
                 # else:
-                totalFee = finish(startTime, duration, distance)
+                totalFee = finishRide(startTime, duration, distance)
                 resume(totalFee, duration, distance)
                 startTime = None
                 
