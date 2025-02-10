@@ -13,3 +13,23 @@
 --- Resumen del viaje ---
 2025-02-10 14:45:25,528 - Duración total del viaje: 0.11
 2025-02-10 14:45:25,529 - Tiempo parado: 0.00 minutos
+2025-02-10 15:09:15,235 - 
+---Viaje iniciado!🚕🚕---
+2025-02-10 15:09:17,701 - ------Viaje en pausa ⏸️------
+2025-02-10 15:09:19,608 - 
+---Viaje finalizado 🔚---
+2025-02-10 15:09:19,608 - El costo total del viaje es: €3.50
+2025-02-10 15:09:19,609 - 
+--- Resumen del viaje ---
+2025-02-10 15:09:19,609 - Duración total del viaje: 0.04
+2025-02-10 15:09:19,609 - Tiempo parado: 0.00 minutos
+INFO:root:
+---Viaje iniciado!🚕🚕---
+INFO:root:------Viaje en pausa ⏸️------
+INFO:root:
+---Viaje finalizado 🔚---
+INFO:root:El costo total del viaje es: €3.50
+INFO:root:
+--- Resumen del viaje ---
+INFO:root:Duración total del viaje: 0.05
+INFO:root:Tiempo parado: 0.00 minutos
