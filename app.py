@@ -4,28 +4,38 @@ print("Bienvenid@ al taxímetro")
 print("El taxímetro funciona de la siguiente manera:")
 
 
+def createTaximeter():
+    return {
+        'startTime' : None,
+        'statusTime' : None,
+        'currentStatus' : 'move',
+        'moveDuration' : 0,
+        'stopDuration' : 0,
+        'lastTime' : None
+    }
 
-
-def initRide():
+def initRide(state):
     print("\n---Viaje iniciado!---")
-    startTime = datetime.datetime.now()
-    statusChange = startTime
-    currentStatus = "move"
-    return startTime, statusChange, currentStatus, 0, 0
+    state['startTime'] = datetime.datetime.now()
+    state['statusChange'] = state['startTime']
+    state['lastTime'] = state['startTime']
+    state['currentStatus'] = 'move'
+    return state
 
-def pauseRide(currentStatus, statusChange, moveDuration, stopDuration):
+def pauseRide(state):
     now = datetime.datetime.now()
-    elapsed = (now - statusChange).total_seconds() / 60 
-    if currentStatus == "move":
-        moveDuration += elapsed
-        currentStatus = "pause"
+    elapsed = (now - state['lastTime']).total_seconds() / 60 
+    if state['currentStatus'] == "move":
+        state['moveDuration'] += elapsed
+        state['currentStatus'] = "pause"
         print("Viaje en pausa")
 
     else:
-        stopDuration += elapsed
-        currentStatus = "move"
+        state['stopDuration'] += elapsed
+        state['currentStatus'] = "move"
         print("Viaje reanudado")
-    return currentStatus, now, moveDuration, stopDuration
+    state['lastTime'] = now
+    return state
 
 def changeStatus(currentStatus, statusChange, moveDuration, stopDuration):
     now = datetime.datetime.now()
