@@ -1,4 +1,5 @@
 import datetime 
+import logging
 
 print("Bienvenid@ al taxímetro")
 print("En este taxímetro podrás iniciar un viaje y pausarlo cuando desees, así mismo, podrás renudar tu viaje, y finalizarlo cuando lo consideres, gracias por usar nuestro servicio")
@@ -28,12 +29,12 @@ def pauseRide(state):
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "pause"
-        print("------Viaje en pausa ⏸️------")
+        logging.info("\n------Viaje en pausa ⏸️------")
 
     else:
         state['stopDuration'] += elapsed
         state['currentStatus'] = "move"
-        print("------Viaje reanudado 🚕🚕------")
+        logging.info("\n------Viaje reanudado 🚕🚕------")
     state['lastTime'] = now
     return state
 
@@ -44,11 +45,11 @@ def changeStatus(state):
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "stop"
-        print("------Viaje detenido 🛑------")
+        logging.info("\n------Viaje detenido 🛑------")
     else:
         state['stopDuration'] += elapsed
         state['currentStatus'] = "move"
-        print("------Taxi en movimiento------")
+        logging.info("\n------Taxi en movimiento------")
 
     return state   
 
@@ -75,6 +76,15 @@ def calculateFee(moveDuration, stopDuration):
     return feeBase + stopFee + moveFee
 
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(message)s",
+    handlers=[
+        logging.FileHandler(".taximeter.log", mode="a", encoding="utf-8"),
+        logging.StreamHandler(),
+    ],
+)
+
 def main():
     
     state = createTaximeter()
@@ -84,7 +94,7 @@ def main():
         print("1. Iniciar viaje")
         print("2. Pausar/Reanudar viaje")
         print("3. Finalizar viaje")
-        print("4. Salir del programa")
+        print("4. Salir del programa\n")
         
         option = input("Elige una opción: ")
     
