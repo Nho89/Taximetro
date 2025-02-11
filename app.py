@@ -1,7 +1,7 @@
 import datetime 
 
 print("Bienvenid@ al taxímetro")
-print("El taxímetro funciona de la siguiente manera: en este taxímetro podrás iniciar un viaje y pausarlo cuando desees, así mismo podrás renudar tu viaje, y finalizarlo cuando consideres que debe terminar el viaje, estas son las siguientes opciones")
+print("En este taxímetro podrás iniciar un viaje y pausarlo cuando desees, así mismo, podrás renudar tu viaje, y finalizarlo cuando lo consideres, gracias por usar nuestro servicio")
 
 
 def createTaximeter():
