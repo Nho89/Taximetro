@@ -42,7 +42,7 @@ To enter the repository folder.
 
 ## Test
 
-* Copy code: ``
+* Copy code: `python -m unittest`
 This will run the tests.
 
 
@@ -50,6 +50,8 @@ This will run the tests.
 
 * __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
 * __app.py:__ entry point of the application.
+* __test_app.py:__ 
+* __.taximeter.log:__ system of logs.
 * __README.md:__ this file typically contains instructions on how to set up and run your project, as well as any other relevant information for contributors or users.
 
 
