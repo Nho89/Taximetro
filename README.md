@@ -50,7 +50,7 @@ This will run the tests.
 
 * __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
 * __app.py:__ entry point of the application.
-* __test_app.py:__ 
+* __test_app.py:__ file with unit tests of the application.
 * __.taximeter.log:__ system of logs.
 * __README.md:__ this file typically contains instructions on how to set up and run your project, as well as any other relevant information for contributors or users.
 
