@@ -1,5 +1,5 @@
 import unittest
-from app import createTaximeter, initRide
+from app import createTaximeter, initRide, finishRide
 
 class testTaxi(unittest.TestCase):
 
