@@ -29,12 +29,12 @@ def pauseRide(state):
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "pause"
-        logging.info("------Viaje en pausa ⏸️------")
+        logging.info("\n------Viaje en pausa ⏸️------")
 
     else:
         state['stopDuration'] += elapsed
         state['currentStatus'] = "move"
-        logging.info("------Viaje reanudado 🚕🚕------")
+        logging.info("\n------Viaje reanudado 🚕🚕------")
     state['lastTime'] = now
     return state
 
@@ -45,11 +45,11 @@ def changeStatus(state):
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "stop"
-        logging.info("------Viaje detenido 🛑------")
+        logging.info("\n------Viaje detenido 🛑------")
     else:
         state['stopDuration'] += elapsed
         state['currentStatus'] = "move"
-        logging.info("------Taxi en movimiento------")
+        logging.info("\n------Taxi en movimiento------")
 
     return state   
 
@@ -94,7 +94,7 @@ def main():
         print("1. Iniciar viaje")
         print("2. Pausar/Reanudar viaje")
         print("3. Finalizar viaje")
-        print("4. Salir del programa")
+        print("4. Salir del programa\n")
         
         option = input("Elige una opción: ")
     
