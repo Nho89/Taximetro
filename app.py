@@ -60,10 +60,8 @@ def finishRide(state):
     elif state['currentStatus'] == "stop":
         state['stopDuration'] += elapsed
 
-    # totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
     print("\n---Viaje finalizado 🔚---")
     
-    # print(f"El costo total del viaje es: €{totalFee:.2f}")
     return state
 
 def calculateFee(moveDuration, stopDuration):
