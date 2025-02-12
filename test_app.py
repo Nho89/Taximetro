@@ -1,5 +1,5 @@
 import unittest
-from app import createTaximeter, initRide, finishRide, pauseRide
+from app import createTaximeter, initRide, finishRide, pauseRide, calculateFee
 
 class testTaxi(unittest.TestCase):
 
@@ -25,6 +25,15 @@ class testTaxi(unittest.TestCase):
         pauseRide(state)
         self.assertIsNotNone(state['lastTime'])
         self.assertEqual(state['currentStatus'], 'pause')
+
+    def test_calculateFee(self):
+        state = self.state.copy()
+        initRide(state)
+        finishRide(state)
+        fee = calculateFee(state['moveDuration'], state['stopDuration'])
+        self.assertIsInstance(fee, float)
+        self.assertGreater(fee, 0, "mensaje")
+
 
 
 if __name__ == '__main__':
