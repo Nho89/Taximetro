@@ -60,10 +60,10 @@ def finishRide(state):
     elif state['currentStatus'] == "stop":
         state['stopDuration'] += elapsed
 
-    totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
+    # totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
     print("\n---Viaje finalizado 🔚---")
     
-    print(f"El costo total del viaje es: €{totalFee:.2f}")
+    # print(f"El costo total del viaje es: €{totalFee:.2f}")
     return state
 
 def calculateFee(moveDuration, stopDuration):
@@ -88,7 +88,7 @@ logging.basicConfig(
 def main():
     
     state = createTaximeter()
-
+    totalFee = calculateFee(state['moveDuration'], state['stopDuration'])
     while True:
         print("\nOpciones:")
         print("1. Iniciar viaje")
@@ -120,6 +120,7 @@ def main():
                 print("\n--- Resumen del viaje ---")
                 print(f"Duración total del viaje: {round(state['moveDuration'], 2) + round(state['stopDuration'])}")
                 print(f"Tiempo parado: {state['stopDuration']:.2f} minutos")
+                print(f"El costo total del viaje es: €{totalFee:.2f}")
                 print("------------------------")
                 state = createTaximeter()
 
