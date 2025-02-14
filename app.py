@@ -2,7 +2,14 @@ import datetime
 import logging
 
 print("Bienvenid@ al taxímetro")
-print("En este taxímetro podrás iniciar un viaje y pausarlo cuando desees, así mismo, podrás renudar tu viaje, y finalizarlo cuando lo consideres, gracias por usar nuestro servicio")
+print("Con este taxímetro, podrás registrar tus viajes de taxi, incluyendo pausas, y calcular el costo total.")
+print("Sigue las opciones del menú para controlar el viaje.")
+print("\n¿Cuánto cuesta el viaje?")
+print("La tarifa se calcula así:")
+print(" - Inicio: 3.5€.")
+print(" - En movimiento: 0.05€ por segundo.")
+print(" - Parado: 0.02€ por segundo.")
+
 
 
 def createTaximeter():
@@ -25,7 +32,7 @@ def initRide(state):
 
 def pauseRide(state):
     now = datetime.datetime.now()
-    elapsed = (now - state['lastTime']).total_seconds() / 60 
+    elapsed = (now - state['lastTime']).total_seconds() #/ 60 
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "pause"
@@ -38,20 +45,20 @@ def pauseRide(state):
     state['lastTime'] = now
     return state
 
-def changeStatus(state):
-    now = datetime.datetime.now()
-    elapsed = (now - state['lastTime']).total_seconds() / 60
+# def changeStatus(state):
+#     now = datetime.datetime.now()
+#     elapsed = (now - state['lastTime']).total_seconds() / 60
 
-    if state['currentStatus'] == "move":
-        state['moveDuration'] += elapsed
-        state['currentStatus'] = "stop"
-        logging.info("\n------Viaje detenido 🛑------")
-    else:
-        state['stopDuration'] += elapsed
-        state['currentStatus'] = "move"
-        logging.info("\n------Taxi en movimiento------")
+#     if state['currentStatus'] == "move":
+#         state['moveDuration'] += elapsed
+#         state['currentStatus'] = "stop"
+#         logging.info("\n------Viaje detenido 🛑------")
+#     else:
+#         state['stopDuration'] += elapsed
+#         state['currentStatus'] = "move"
+#         logging.info("\n------Taxi en movimiento------")
 
-    return state   
+#     return state   
 
 def finishRide(state):
     elapsed = (datetime.datetime.now() - state['startTime']).total_seconds() / 60
@@ -70,9 +77,9 @@ def calculateFee(moveDuration, stopDuration):
     
     feeBase = 3.5
     feeStop = 0.02
-    feeMove = 1.5
+    feeMove = 0.05
     stopFee = stopDuration * feeStop
-    moveFee = max(0, moveDuration - 10) * feeMove
+    moveFee = max(0, moveDuration) * feeMove
     return feeBase + stopFee + moveFee
 
 
