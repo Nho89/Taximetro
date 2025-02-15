@@ -1,5 +1,8 @@
 import datetime 
 import logging
+import locale
+
+locale.setlocale(locale.LC_ALL, "es_ES.UTF-8")
 
 print("Bienvenid@ al taxímetro")
 print("Con este taxímetro, podrás registrar tus viajes de taxi, incluyendo pausas, y calcular el costo total.")
@@ -25,14 +28,14 @@ def createTaximeter():
 def initRide(state):
     print("\n---Viaje iniciado!🚕🚕---")
     state['startTime'] = datetime.datetime.now()
-    state['statusChange'] = state['startTime']
-    state['lastTime'] = state['startTime']
+    # state['statusChange'] = state['startTime']
+    state['lastTime'] = datetime.datetime.now() #state['startTime']
     state['currentStatus'] = 'move'
     return state
 
 def pauseRide(state):
     now = datetime.datetime.now()
-    elapsed = (now - state['lastTime']).total_seconds() #/ 60 
+    elapsed = (now - state['lastTime']).total_seconds() / 60 
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "pause"
@@ -44,34 +47,26 @@ def pauseRide(state):
         logging.info("\n------Viaje reanudado 🚕🚕------")
     state['lastTime'] = now
     return state
-
-# def changeStatus(state):
-#     now = datetime.datetime.now()
-#     elapsed = (now - state['lastTime']).total_seconds() / 60
-
-#     if state['currentStatus'] == "move":
-#         state['moveDuration'] += elapsed
-#         state['currentStatus'] = "stop"
-#         logging.info("\n------Viaje detenido 🛑------")
-#     else:
-#         state['stopDuration'] += elapsed
-#         state['currentStatus'] = "move"
-#         logging.info("\n------Taxi en movimiento------")
-
-#     return state   
+  
 
 def finishRide(state):
-    elapsed = (datetime.datetime.now() - state['startTime']).total_seconds() / 60
+    now = datetime.datetime.now()
+    elapsed = (now - state['lastTime']).total_seconds()
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
-    elif state['currentStatus'] == "stop":
+    else:
         state['stopDuration'] += elapsed
 
-    # totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
+    totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
     print("\n---Viaje finalizado 🔚---")
+    print("\n--- Resumen del viaje ---")
+    print(f"Duración total del viaje: {round((state['moveDuration'] + state['stopDuration']) / 60, 2)} minutos")
+    print(f"Tiempo en movimiento: {round(state['moveDuration']/60,2)} minutos")
+    print(f"Tiempo parado: {round(state['stopDuration'] / 60, 2)} minutos")
+    print(f"El costo total del viaje es: {locale.currency(totalFee, grouping=True)}")
+    print("------------------------")
     
-    # print(f"El costo total del viaje es: €{totalFee:.2f}")
-    return state
+    return createTaximeter()
 
 def calculateFee(moveDuration, stopDuration):
     
@@ -79,7 +74,7 @@ def calculateFee(moveDuration, stopDuration):
     feeStop = 0.02
     feeMove = 0.05
     stopFee = stopDuration * feeStop
-    moveFee = max(0, moveDuration) * feeMove
+    moveFee = moveDuration * feeMove
     return feeBase + stopFee + moveFee
 
 
@@ -95,7 +90,6 @@ logging.basicConfig(
 def main():
     
     state = createTaximeter()
-    totalFee = calculateFee(state['moveDuration'], state['stopDuration'])
     while True:
         print("\nOpciones:")
         print("1. Iniciar viaje")
@@ -124,12 +118,7 @@ def main():
                 print("-----------No hay un viaje iniciado-----------")
             else:
                 state = finishRide(state)
-                print("\n--- Resumen del viaje ---")
-                print(f"Duración total del viaje: {round(state['moveDuration'], 2) + round(state['stopDuration'])}")
-                print(f"Tiempo parado: {state['stopDuration']:.2f} minutos")
-                print(f"El costo total del viaje es: €{totalFee:.2f}")
-                print("------------------------")
-                state = createTaximeter()
+                
 
         elif option == "4":
             print("-----------Adiós y gracias por usar el taxi 👋-----------")
@@ -137,7 +126,5 @@ def main():
 
         else:
             print("-----------Opción no válida, por favor elige una opción correcta-----------")
-            
-        
 
 main()
