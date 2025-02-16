@@ -1,7 +1,7 @@
 
 <h1> Taximeter</h1>
 
-# Index
+## Index
 
 + [Description](#description)
 + [Project Configuration](#project-Configuration)
@@ -12,7 +12,7 @@
 + [Authors](#authors)
 + [Contributions](#contributions)
 
-# Descripcción
+## Descripcción
 
 <p>Taximeter is a command-line application that allows users to record taxi trips, including pauses, and calculate the total cost based on the time spent moving and paused.</p>
 
@@ -72,7 +72,7 @@ This will run the tests.
 * __README.md:__ Project documentation.
 
 
-# Technologies
+## Technologies
 
 <img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/visual_studio_code.png" >&nbsp;
 <img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" >&nbsp;
@@ -80,7 +80,7 @@ This will run the tests.
 
 
 
-# Authors
+## Authors
 
  - Web Developer: [Nhoeli Salazar](https://github.com/Nho89)
 
