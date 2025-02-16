@@ -47,12 +47,12 @@ To enter the repository folder.
 
 * Each trip is logged in the .taximeter.log file with the following format:
 
---- Resumen del viaje 🧳---
-📆 Fecha: 2025-02-16 22:31:09
-⌛ Duración total del viaje: 0.53 minutos
-🚕 Tiempo en movimiento: 0.53 minutos
-⏸️ Tiempo parado: 0.0 minutos
-💰 El costo total del viaje es: 5,10 €
+- --- Resumen del viaje 🧳---
+- 📆 Fecha: 2025-02-16 22:31:09
+- ⌛ Duración total del viaje: 0.53 minutos
+- 🚕 Tiempo en movimiento: 0.53 minutos
+- ⏸️ Tiempo parado: 0.0 minutos
+- 💰 El costo total del viaje es: 5,10 €
 
 
 ## Test
