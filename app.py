@@ -7,8 +7,7 @@ locale.setlocale(locale.LC_ALL, "es_ES.UTF-8")
 print("Bienvenid@ al taxímetro")
 print("Con este taxímetro, podrás registrar tus viajes de taxi, incluyendo pausas, y calcular el costo total.")
 print("Sigue las opciones del menú para controlar el viaje.")
-print("\n¿Cuánto cuesta el viaje?")
-print("La tarifa se calcula así:")
+print("\n¿Cuánto cuesta el viaje?:")
 print(" - Inicio: 3.5€.")
 print(" - En movimiento: 0.05€ por segundo.")
 print(" - Parado: 0.02€ por segundo.")
@@ -26,9 +25,8 @@ def createTaximeter():
     }
 
 def initRide(state):
-    print("\n---Viaje iniciado!🚕🚕---")
+    print("\n---🚕🚕 Viaje iniciado! 🚕🚕---")
     state['startTime'] = datetime.datetime.now()
-    # state['statusChange'] = state['startTime']
     state['lastTime'] = datetime.datetime.now() #state['startTime']
     state['currentStatus'] = 'move'
     return state
@@ -39,12 +37,12 @@ def pauseRide(state):
     if state['currentStatus'] == "move":
         state['moveDuration'] += elapsed
         state['currentStatus'] = "pause"
-        logging.info("\n------Viaje en pausa ⏸️------")
+        print("\n------🚖 Viaje en pausa ⏸️------")
 
     else:
         state['stopDuration'] += elapsed
         state['currentStatus'] = "move"
-        logging.info("\n------Viaje reanudado 🚕🚕------")
+        print("\n------🚕🚕 Viaje reanudado 🚕🚕------")
     state['lastTime'] = now
     return state
   
@@ -58,14 +56,19 @@ def finishRide(state):
         state['stopDuration'] += elapsed
 
     totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
-    print("\n---Viaje finalizado 🔚---")
-    print("\n--- Resumen del viaje ---")
-    print(f"Duración total del viaje: {round((state['moveDuration'] + state['stopDuration']) / 60, 2)} minutos")
-    print(f"Tiempo en movimiento: {round(state['moveDuration']/60,2)} minutos")
-    print(f"Tiempo parado: {round(state['stopDuration'] / 60, 2)} minutos")
-    print(f"El costo total del viaje es: {locale.currency(totalFee, grouping=True)}")
-    print("------------------------")
     
+    logEntry = (
+        f"\n--- Resumen del viaje 🧳---\n"
+        f"📆 Fecha: {state['startTime'].strftime('%Y-%m-%d %H:%M:%S')}\n"
+        f"⌛ Duración total del viaje: {round((state['moveDuration'] + state['stopDuration']) / 60, 2)} minutos\n"
+        f"🚕 Tiempo en movimiento: {round(state['moveDuration']/60,2)} minutos\n"
+        f"⏸️ Tiempo parado: {round(state['stopDuration'] / 60, 2)} minutos\n"
+        f"💰 El costo total del viaje es: {locale.currency(totalFee, grouping=True)}\n"
+        f"------------------------"
+    )
+    logging.info(logEntry)
+    print("\n---🚖 Viaje finalizado 🔚---")
+
     return createTaximeter()
 
 def calculateFee(moveDuration, stopDuration):
@@ -92,30 +95,30 @@ def main():
     state = createTaximeter()
     while True:
         print("\nOpciones:")
-        print("1. Iniciar viaje")
-        print("2. Pausar/Reanudar viaje")
-        print("3. Finalizar viaje")
-        print("4. Salir del programa\n")
+        print("1.🚕 Iniciar viaje")
+        print("2.⏸️  Pausar/Reanudar viaje")
+        print("3.🔚 Finalizar viaje")
+        print("4.💨 Salir del programa\n")
         
         option = input("Elige una opción: ")
     
         if option == "1":
             if state['startTime']:
-                print("-----------Ya hay un viaje iniciado, puedes finalizarlo para iniciar otro-----------")
+                print("-----------🚦Ya hay un viaje iniciado, puedes finalizarlo para iniciar otro🚦-----------")
             else: 
                 state = initRide(state)
             
         
         elif option == "2":
             if not state['startTime']:
-                print("-----------No hay un viaje iniciado-----------")
+                print("-----------🚦No hay un viaje iniciado🚦-----------")
             else:
                 state = pauseRide(state)
                 
 
         elif option == "3":
             if not state['startTime']:
-                print("-----------No hay un viaje iniciado-----------")
+                print("-----------🚦No hay un viaje iniciado🚦-----------")
             else:
                 state = finishRide(state)
                 

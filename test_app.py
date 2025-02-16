@@ -6,10 +6,21 @@ class testTaxi(unittest.TestCase):
     def setUp(self):                #método que se ejecuta antes de pasar cada prueba
         self.state = createTaximeter()
 
+
+    def test_createTaximeter(self):
+        state = self.state
+        self.assertIsNone(state['startTime'])
+        self.assertIsNone(state['lastTime'])
+        self.assertEqual(state['currentStatus'], 'move')
+        self.assertEqual(state['moveDuration'], 0)
+        self.assertEqual(state['stopDuration'], 0)
+
+
     def test_initRide(self):
         state = self.state.copy()
         initRide(state)
         self.assertIsNotNone(state['startTime'])   #comprobamos que startTime no sea nulo
+        self.assertIsNone(state['lastTime'])
         self.assertEqual(state['currentStatus'], 'move')    #comprobamos que el estado sea move
 
     def test_finishRide(self):
