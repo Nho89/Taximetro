@@ -85,7 +85,7 @@ This will run the tests.
  - Web Developer: [Nhoeli Salazar](https://github.com/Nho89)
 
 
-# Contributions
+## Contributions
 Contributions are welcome! If you find any problems or have suggestions for improvement, please create an issue or make a pull request.
    
 **[⬆️ Back to Index](#index)**
