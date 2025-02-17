@@ -3,7 +3,7 @@ from app import createTaximeter, initRide, finishRide, pauseRide, calculateFee
 
 class testTaxi(unittest.TestCase):
 
-    def setUp(self):                #método que se ejecuta antes de pasar cada prueba
+    def setUp(self):                #método para prepar el estado inicial para los test y le pasamos self para referirnos al propio objeto.
         self.state = createTaximeter()
 
 
