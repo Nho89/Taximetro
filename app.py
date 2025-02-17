@@ -3,7 +3,7 @@ import logging
 import locale
 
 locale.setlocale(locale.LC_ALL, "es_ES.UTF-8")
-
+print("\n------------------------")
 print("Bienvenid@ al taxímetro")
 print("Con este taxímetro, podrás registrar tus viajes de taxi, incluyendo pausas, y calcular el costo total.")
 print("Sigue las opciones del menú para controlar el viaje.")
@@ -27,7 +27,7 @@ def createTaximeter():
 def initRide(state):
     print("\n---🚕🚕 Viaje iniciado! 🚕🚕---")
     state['startTime'] = datetime.datetime.now()
-    state['lastTime'] = datetime.datetime.now() #state['startTime']
+    state['lastTime'] = datetime.datetime.now()
     state['currentStatus'] = 'move'
     return state
 
@@ -58,6 +58,7 @@ def finishRide(state):
     totalFee = calculateFee(state['moveDuration'], state['stopDuration'])    
     
     logEntry = (
+        f"\n------------------------"
         f"\n--- Resumen del viaje 🧳---\n"
         f"📆 Fecha: {state['startTime'].strftime('%Y-%m-%d %H:%M:%S')}\n"
         f"⌛ Duración total del viaje: {round((state['moveDuration'] + state['stopDuration']) / 60, 2)} minutos\n"
@@ -124,7 +125,7 @@ def main():
                 
 
         elif option == "4":
-            print("-----------Adiós y gracias por usar el taxi 👋-----------")
+            print("-----------Adiós y gracias por usar el taxi 👋-----------\n")
             break
 
         else:

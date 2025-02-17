@@ -20,7 +20,7 @@ class testTaxi(unittest.TestCase):
         state = self.state.copy()
         initRide(state)
         self.assertIsNotNone(state['startTime'])   #comprobamos que startTime no sea nulo
-        self.assertIsNone(state['lastTime'])
+        self.assertIsNotNone(state['lastTime'])
         self.assertEqual(state['currentStatus'], 'move')    #comprobamos que el estado sea move
 
     def test_finishRide(self):
