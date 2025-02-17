@@ -1,61 +1,78 @@
 
-<h1> Taxímetro </h1>
+<h1> Taximeter</h1>
 
-
-
-# Index
+## Index
 
 + [Description](#description)
-+ [Project Configuration](#project-configuration)
-+ [Initialize the Postman](#initialize-the-postman)
++ [Project Configuration](#project-Configuration)
++ [Logging System](#Logging-System)
 + [Test](#test)
 + [Project Structure ](#project-structure)
 + [Technologies](#technologies)
 + [Authors](#authors)
 + [Contributions](#contributions)
 
-# Descripcción
+## Descripcción
 
+<p>Taximeter is a command-line application that allows users to record taxi trips, including pauses, and calculate the total cost based on the time spent moving and paused.</p>
 
 ## Project Configuration
 
 1. **Clone the Repository:**
 
 `bash`
-* Copy code in your terminal: `git clone `
-* Copy code in your terminal: `` <br>
+* Copy code in your terminal: `git clone https://github.com/Nho89/Taximetro.git`
+* Copy code in your terminal: `cd Taximetro` <br>
 To enter the repository folder.
 
 
-2. **Create the file __.env__**
+2. **(Optional) Create a virtual environment:**
    
-* Create the file __.env__ located in the folder ""
-* Copy the information placed on ´.env_example´ and fill it with your personal data
+`bash`   
+* Copy code: `python -m venv venv`
+* Copy code: `source .venv/Scripts/activate`
 
 
 3. **Install Dependencies:** 
 
 `bash`
-* Copy code: ``
-* Copy code to make the server run: ``
+* Copy code: `pip install -r requirements.txt`
+
+4. **Running the Application**
+
+`bash`
+* Copy code: `python app.py`
+
+## Logging System
+
+* Each trip is logged in the .taximeter.log file with the following format:
+
+- --- Resumen del viaje 🧳---
+- 📆 Fecha: 2025-02-16 22:31:09
+- ⌛ Duración total del viaje: 0.53 minutos
+- 🚕 Tiempo en movimiento: 0.53 minutos
+- ⏸️ Tiempo parado: 0.0 minutos
+- 💰 El costo total del viaje es: 5,10 €
 
 
 ## Test
 
+`bash`
 * Copy code: `python -m unittest`
 This will run the tests.
 
 
 ## Project Structure 
 
-* __.gitignore:__  specifies files and folders ignored by Git to prevent irrelevant or automatically generated files from being tracked.
-* __app.py:__ entry point of the application.
+* __app.py:__  Application entry point.
 * __test_app.py:__ file with unit tests of the application.
-* __.taximeter.log:__ system of logs.
-* __README.md:__ this file typically contains instructions on how to set up and run your project, as well as any other relevant information for contributors or users.
+* __.taximeter.log:__ system log file.
+* __requirements.txt:__ Project dependencies.
+* __.gitignore:__ Files ignored by Git.
+* __README.md:__ Project documentation.
 
 
-# Technologies
+## Technologies
 
 <img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/visual_studio_code.png" >&nbsp;
 <img width="50" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/python.png" >&nbsp;
@@ -63,12 +80,12 @@ This will run the tests.
 
 
 
-# Authors
+## Authors
 
  - Web Developer: [Nhoeli Salazar](https://github.com/Nho89)
 
 
-# Contributions
+## Contributions
 Contributions are welcome! If you find any problems or have suggestions for improvement, please create an issue or make a pull request.
    
 **[⬆️ Back to Index](#index)**
